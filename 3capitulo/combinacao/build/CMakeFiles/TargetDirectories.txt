@@ -1,0 +1,3 @@
+/home/andrei/Documentos/3capitulo/combinacao/build/CMakeFiles/combinacao.dir
+/home/andrei/Documentos/3capitulo/combinacao/build/CMakeFiles/edit_cache.dir
+/home/andrei/Documentos/3capitulo/combinacao/build/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,3 @@
+/home/andrei/Documentos/3capitulo/bitplanes/build/CMakeFiles/bitplanes.dir
+/home/andrei/Documentos/3capitulo/bitplanes/build/CMakeFiles/edit_cache.dir
+/home/andrei/Documentos/3capitulo/bitplanes/build/CMakeFiles/rebuild_cache.dir
