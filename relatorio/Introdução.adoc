@@ -1,0 +1,19 @@
+
+== Introdução 
+
+//asciidoctor-pdf Relatorio1UniPDI.adoc
+//asciidoctor -D build *.adoc
+
+O presente relatório documenta as atividades práticas realizadas na disciplina DCA0445 - Processamento Digital de Imagens na Universidade Federal do Rio Grande do Norte (UFRN). O objetivo principal das atividades foi aplicar conceitos teóricos de processamento de imagens utilizando a biblioteca OpenCV em linguagem C++.
+Neste trabalho, foram desenvolvidos diversos programas que abordam diferentes aspectos do processamento de imagens, desde operações básicas como manipulação de pixels e regiões de interesse, até técnicas mais avançadas como convolução 2D, aplicação de mapas de cores, conversão entre modelos de cor, e efeitos visuais como profundidade de campo e tilt-shift. Cada capítulo do relatório detalha um conjunto específico de práticas, explicando os objetivos, metodologias e resultados obtidos.
+Através dessas atividades, foi possível consolidar o entendimento dos fundamentos do processamento digital de imagens, bem como aprimorar habilidades práticas na implementação de algoritmos utilizando OpenCV. 
+
+// ===============================================
+// Links — aparecem apenas no HTML
+// ===============================================
+ifdef::backend-html5[]
+* xref:1capitulo.adoc[Ir para o Capítulo 1]
+* xref:2capitulo.adoc[Ir para o Capítulo 2]
+* xref:3capitulo.adoc[Ir para o Capítulo 3]
+* xref:4capitulo.adoc[Ir para o Capítulo 4]
+endif::backend-html5[]

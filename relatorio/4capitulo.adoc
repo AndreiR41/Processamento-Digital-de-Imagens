@@ -1,0 +1,106 @@
+== Processamento de Imagens no Domínio Espacial
+
+:toc: left
+
+* Neste capítulo, exploramos técnicas de processamento de imagens no domínio espacial utilizando o OpenCV. Abordamos desde operações básicas como convolução 2D até efeitos visuais avançados como profundidade de campo e tilt-shift, aplicados tanto em imagens estáticas quanto em vídeos.
+
+=== Convolução 2D
+* A ideia dessa prática é demonstrar os efeitos da convolução 2D com o filtro da média aplicado com kernels de diferentes dimensões. Utilizando a função cv::blur() do OpenCV, são aplicados filtros de média com kernels 3x3, 11x11 e 21x21 sobre a mesma imagem redimensionada. Conforme o tamanho do kernel aumenta, observa-se um efeito de suavização progressivamente mais intenso: o kernel 3x3 preserva a maioria dos detalhes enquanto reduz ruídos sutis, o 11x11 produz um desfoque moderado que elimina detalhes finos, e o 21x21 gera um borramento significativo onde apenas as características em larga escala da imagem permanecem visíveis, demonstrando claramente o trade-off entre redução de ruído e preservação de detalhes no processamento de imagens.
+
+ifdef::backend-html5[]
+[source,cpp]
+----
+include::/home/andrei/Documentos/4capitulo/convolucao/convolucao.cpp[]
+----
+endif::backend-html5[]
+
+
+.Imagem Original de Brás Cubas
+image::/home/andrei/Documentos/4capitulo/convolucao/Original_resize.png[Imagem Original, width=200, align="center"]
+
+.Kernel 3x3
+image::/home/andrei/Documentos/4capitulo/convolucao/Media 3x3.png[Resultado com Kernel 3x3, width=200, align="center"]
+
+.Kernel 11x11
+image::/home/andrei/Documentos/4capitulo/convolucao/Media 11x11.png[Resultado com Kernel 11x11, width=200, align="center"]
+
+.Kernel 21x21
+image::/home/andrei/Documentos/4capitulo/convolucao/Media 21x21.png[Resultado com Kernel 21x21, width=200, align="center"]
+
+
+
+
+=== Profundidade de Campo
+
+* A ideia dessa prática é implementar um algoritmo de profundidade de campo (Depth of Field) através do operador Laplaciano para detectar regiões de maior nitidez ao longo de um vídeo. Utilizando o filtro Laplaciano 3x3 [0,-1,0; -1,4,-1; 0,-1,0] com filter2D(), o programa calcula para cada frame o valor absoluto do Laplaciano, que indica as regiões de alta frequência espacial (bordas nítidas). A cada frame, é criada uma máscara binária comparando o Laplaciano atual com o máximo acumulado, e apenas os pixels mais nítidos são copiados para a imagem final de saída através do método copyTo() com máscara, resultando numa composição que acumula progressivamente as regiões mais focadas de todos os frames processados do vídeo.
+
+ifdef::backend-html5[]
+[source,cpp]
+----
+include::/home/andrei/Documentos/4capitulo/depthoffield/depthoffield.cpp[]
+----
+endif::backend-html5[]
+
+* Final do vídeo vasos720.mp4 em escala cinza:
+
+.Imagem Original do final do Vídeo
+image::/home/andrei/Documentos/4capitulo/depthoffield/final_original.png[Imagem Original do Vídeo, width=600, align="center"]
+
+* Final de vídeo após a coreção da profundidade de campo:
+
+.Resultado com ajuste da Profundidade de Campo
+image::/home/andrei/Documentos/4capitulo/depthoffield/final_dof.png[Resultado com Profundidade de Campo, width=600, align="center"]
+
+Vemos aqui que alguns pixels acabaram se perdendo durante o processo que deixou alguma pequenas lacunas na 
+imagem resultante.
+
+
+
+=== Tilt-Shift
+
+* Este código cria um efeito tilt-shift que deixa apenas uma faixa da imagem nítida, como se fosse uma miniatura. A imagem original é desfocada com um filtro Gaussiano e depois combinada com a versão nítida usando uma máscara suave. A máscara é feita com funções matemáticas que criam uma transição gradual entre a parte focada e a desfocada.
+
+.Imagem antes do tilt-shift
+image::/home/andrei/Documentos/4capitulo/tiltshift/panda.jpg[Imagem Original, width=300, align="center"]
+
+* Quatro controles deslizantes permitem ajustar o efeito em tempo real: um controla a altura da faixa em foco, outro regula a suavidade das bordas, outro move a faixa verticalmente e o último ajusta a intensidade das cores. A saturação é modificada convertendo a imagem para o formato HSV e alterando apenas o canal de cor, sem mexer no brilho.
+
+ifdef::backend-html5[]
+[source,cpp]
+----
+include::/home/andrei/Documentos/4capitulo/tiltshift/tiltshift.cpp[]
+----
+endif::backend-html5[]
+
+
+* O programa mostra duas janelas: uma com o resultado final e outra com a máscara usada no efeito. Assim fica mais fácil entender como o tilt-shift está sendo aplicado e fazer os ajustes necessários para conseguir o efeito visual desejado na imagem.
+
+.Imagem com Efeito Tilt-Shift e Interface
+image::/home/andrei/Documentos/4capitulo/tiltshift/saidaprograma.png[Imagem com Efeito Tilt-Shift e Interface, width=500, align="center"]
+
+=== Vídeo com Tilt-Shift
+
+* Este código aplica um efeito tilt-shift simples no vídeo do gato *Brás Cubas*, na tentaiva de criar uma ilusão de miniatura que deixa só uma faixa central nítida enquanto o resto fica desfocado e saturado. Ele processa cada frame do vídeo original misturando a imagem nítida com uma versão borrada usando uma máscara suave, depois aumenta um pouco a saturação das cores para dar aquele toque mais vibrante. O resultado final é um vídeo lado a lado mostrando a cena original e a versão modificada.
+
+video::/home/andrei/Documentos/4capitulo/tiltshiftVideo/minicubas.mp4[Vídeo Original, width=300]
+
+video::/home/andrei/Documentos/4capitulo/tiltshiftVideo/build/video_tiltshift.mp4[Vídeo com Efeito Tilt-Shift, width=600]
+
+
+// ===============================================
+// Navegação entre capítulos — aparece só no HTML
+// ===============================================
+ifdef::backend-html5[]
+++++
+<hr>
+<div style="text-align:center; margin-top:1em;">
+  <p><strong>Navegação:</strong></p>
+  <p>
+    <a href="3capitulo.html">← Capítulo Anterior</a> |
+    <a href="Introdução.html">Voltar ao Sumário</a>
+  </p>
+  <p style="font-size:0.9em; color:gray;">Fim do documento</p>
+</div>
+<hr>
+++++
+endif::backend-html5[]

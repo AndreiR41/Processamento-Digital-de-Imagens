@@ -1,0 +1,150 @@
+== Manipulação de imagens
+
+:toc: left
+
+* Nesse capítulo trataremos alguns vídeos e imagens para realizar combinações e efeitos visuais utilizando OpenCV. Abordaremos técnicas como lightpainting, decomposição em planos de bits, preenchimento de regiões com floodFill, equalização de histogramas e detecção de movimento em vídeo.
+
+=== Lightpainting
+
+* Foi proposto desenvolver uma técnica de realizar light painting para realçar trajetórias luminosas em vídeo por meio de um código em OpenCV. A solução encontrada foi utilizar operações matriciais do OpenCV: criou-se duas imagens de acumulação onde lightPaint1 emprega cv::max() e soma para realce por adição luminosa, enquanto lightPaint2 aplica cv::bitwise_xor() seguido de cv::max() para destacar diferenças e padrões de variação. A cada frame, as duas visualizações são combinadas horizontalmente com cv::hconcat(), gerando uma comparação side-by-side dos diferentes efeitos de light painting em tempo real durante a reprodução do vídeo.
+
+ifdef::backend-html5[]
+[source,cpp]
+----
+include::/home/andrei/Documentos/3capitulo/combinacao/combinacao.cpp[]
+----
+endif::backend-html5[]
+
+video::/home/andrei/Documentos/3capitulo/combinacao/baladateo.mp4[Vídeo para geração do lightpainting,width=400]
+
+.Lightpainting
+image::/home/andrei/Documentos/3capitulo/combinacao/lightpainting.png[Lightpainting, width=600, align="center"]
+
+=== Decomposição de imagens em planos de bits
+
+* Uma técnica de processamento de imagens é a esteganografia, que consiste em esconder uma imagem dentro de outra. Para isso, utilizamos a decomposição em planos de bits, onde cada pixel é representado por 8 bits. Ao separar esses bits, podemos manipular os planos individualmente. No exemplo abaixo, extraímos os 8 planos de bits de uma imagem  e os exibimos separadamente. Assim recuperando a imagem original escondida nos bits menos significativos da imagem portadora. 
+
+.Diagrama do código
+image::/home/andrei/Documentos/3capitulo/bitplanes/diagramaesteganografia.png[Diagrama do código, width=300, align="center"]
+
+A solução encontrada foi utilizar operações bit-a-bit para separar os canais de cores: os 5 bits mais significativos de cada pixel foram extraídos com a máscara 0b11111000 para reconstruir a imagem portadora, enquanto os 3 bits menos significativos foram isolados com a máscara 0b00000111 para recuperar a imagem escondida. Através de um loop que percorre todos os pixels da imagem esteganografada, o processo reconstitui ambas as imagens simultaneamente, salvando-as em arquivos separados para visualização.
+
+* A imagem original utilizada foi a seguinte:
+
+.Imagem Original
+image::/home/andrei/Documentos/3capitulo/bitplanes/esteganografia.png[Imagem Original, width=300, align="center"]
+
+* A partir do código abaixo separamos as duas imagens utilizando operações bit-a-bit:
+
+ifdef::backend-html5[]
+[source,cpp]
+----
+include::/home/andrei/Documentos/3capitulo/bitplanes/bitplanes.cpp[]
+----    
+endif::backend-html5[]
+
+* A imagem portadora recuperada (5 bits mais significativos):
+
+.Imagem Portadora
+image::/home/andrei/Documentos/3capitulo/bitplanes/portadora_.png[Imagem Portadora, width=300, align="center"]
+
+* A imagem escondida recuperada (3 bits menos significativos):
+
+.Imagem Escondida
+image::/home/andrei/Documentos/3capitulo/bitplanes/escondida_brilho.png[Imagem Escondida, width=300, align="center"]
+
+=== Preenchendo regiões com floodFill
+
+* A atividade proposta visava aprimorar a contagem de objetos em imagens binárias, superando a limitação de 255 labels do método convencional. Para isso, implementou-se uma matriz image_32bit do tipo CV_32SC1 (inteiros de 32 bits), capaz de armazenar até 4 bilhões de rótulos distintos. Durante a detecção de bolhas, cada objeto identificado recebe um índice único na matriz de 32 bits através de floodFill() com máscara, permitindo a contagem precisa de centenas ou milhares de objetos sem restrições de overflow.
+
+.Imagem Original com Bolhas
+image::/home/andrei/Documentos/3capitulo/labelling/bolhas.png[Imagem Original com Bolhas, width=300, align="center"]
+
+* Quanto ao restante do processo, o algoritmo realiza pré-processamento eliminando bolhas nas bordas com floodFill() para evitar contagens incorretas. Na sequência, implementa detecção de buracos internos preenchendo o fundo externo e verificando pixels pretos completamente cercados por objetos. A solução final fornece estatísticas completas (número de bolhas e buracos) e gera imagens de saída para validação visual, demonstrando uma abordagem robusta para análise morfológica de imagens binárias.
+
+ifdef::backend-html5[]
+[source,cpp]
+----
+include::/home/andrei/Documentos/3capitulo/labelling/labeling.cpp[]
+----
+endif::backend-html5[]
+
+* Depois invertendo a cor de fundo para contar quantas bolhas existem na imagem:
+
+.Imagem com os buracos contados
+image::/home/andrei/Documentos/3capitulo/labelling/build/buracos.png[Imagem com Bolhas Contadas, width=300, align="center"]
+
+=== Equalização de Histogramas 
+
+* Nessa atividade implementou-se um sistema de captura em tempo real para comparação de equalização de histograma. Utilizando a câmera, o programa captura frames e os processa em três versões: imagem original colorida, conversão para tons de cinza e aplicação de equalização de histograma com equalizeHist(). Para análise comparativa, as três visualizações são concatenadas horizontalmente com hconcat() formando um único frame triplo, que é exibido em janela e simultaneamente gravado em vídeo através de VideoWriter().
+
+.Comparação de Equalização de Histograma
+image::/home/andrei/Documentos/3capitulo/equalize/comparacao_equalizacao.png[Comparação de Equalização de Histograma, width=600, align="center"]
+
+ifdef::backend-html5[]
+[source,cpp]
+----
+include::/home/andrei/Documentos/3capitulo/equalize/equalize.cpp[]
+----
+endif::backend-html5[]
+
+video::/home/andrei/Documentos/3capitulo/equalize/comparacao_equalizacao.avi[Vídeo de Comparação de Equalização de Histograma,width=600]
+
+
+
+=== Detecção de Movimento em Vídeo
+
+* O programa implementa um detector de movimento baseado na correlação de histogramas de vídeo em tempo real. Através da câmera, cada frame é convertido para tons de cinza e tem seu histograma calculado com 64 bins e normalizado para a faixa [0,1]. A cada iteração, o histograma atual é comparado com o anterior usando cv::compareHist() com o método HISTCMP_CORREL, e quando a correlação cai abaixo do limite de 0.98, o sistema detecta movimento e insere o texto "MEXEU!" no frame. Todo o vídeo processado é gravado com os alertas de movimento, permitindo monitorar e registrar mudanças significativas na cena capturada pela câmera.
+
+
+==== Correlação entre histogramas
+
+A correlação entre histogramas no OpenCV utiliza a *fórmula de correlação de Pearson*, que mede a similaridade linear entre duas distribuições.
+
+Para dois histogramas stem:[H_1] e stem:[H_2] com stem:[N] bins cada, a correlação é calculada como:
+
+[stem]
+++++
+R(H_1, H_2) = 
+\frac{\sum_{i=1}^{N}(H_1(i) - \bar{H_1})(H_2(i) - \bar{H_2})}
+{\sqrt{\sum_{i=1}^{N}(H_1(i) - \bar{H_1})^2 \cdot \sum_{i=1}^{N}(H_2(i) - \bar{H_2})^2}}
+++++
+
+Onde:
+
+- stem:[H_1(i)] e stem:[H_2(i)] são as frequências do bin stem:[i] nos respectivos histogramas
+- stem:[\bar{H_1}] e stem:[\bar{H_2}] são as médias dos valores dos histogramas
+- stem:[N] é o número de bins (64 no código)
+
+*Resultado:*
+
+- stem:[R = 1]: Histogramas perfeitamente correlacionados (cenário estático)
+- stem:[R = 0]: Não há correlação linear
+
+No detector de movimento, quando stem:[R < 0.98], indica mudança significativa na distribuição de intensidades dos pixels, detectando assim movimento na cena.
+
+ifdef::backend-html5[]
+[source,cpp]
+----
+include::/home/andrei/Documentos/3capitulo/motionDetection/motionDetection.cpp[]
+----  
+endif::backend-html5[]  
+
+
+// ===============================================
+// Navegação entre capítulos — aparece só no HTML
+// ===============================================
+ifdef::backend-html5[]
+++++
+<hr>
+<div style="text-align:center; margin-top:1em;">
+  <p><strong>Navegação:</strong></p>
+  <p>
+    <a href="2capitulo.html">← Capítulo Anterior</a> |
+    <a href="4capitulo.html">Próximo Capítulo →</a>
+  </p>
+  <p style="font-size:0.9em; color:gray;">Retorne ao <a href="Introdução.html">Sumário</a></p>
+</div>
+<hr>
+++++
+endif::backend-html5[]

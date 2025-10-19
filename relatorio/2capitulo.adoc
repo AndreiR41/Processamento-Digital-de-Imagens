@@ -1,0 +1,100 @@
+== Processamento de Imagens Coloridas
+
+:toc: left
+
+* Agora vamos explorar o processamento de imagens coloridas utilizando o OpenCV. Iniciamos aplicando diferentes mapas de cores (colormaps) a uma imagem colorida, seguida pela conversão entre diferentes modelos de cor, como RGB e HSV. Utilizamos funções como applyColorMap() para aplicar colormaps predefinidos e convertTo() para manipular os canais de cor individualmente. Além disso, demonstramos a conversão entre os espaços de cor RGB e HSV usando cvtColor(), permitindo uma análise detalhada dos componentes de cor em diferentes representações.
+
+=== Mapas de Cores
+* Este programa aplica diferentes mapas de cores a uma imagem colorida utilizando a função applyColorMap do OpenCV. Inicialmente, a imagem "teozin.jpg" é carregada e convertida para escala de cinza. Em seguida, são aplicados diversos mapas de cores predefinidos, como COLORMAP_JET, COLORMAP_HOT, COLORMAP_COOL. Em seguida, cria uma tabela de lookup (LUT) personalizada onde o canal azul (B) é crescente, o verde (G) é decrescente e o vermelho (R) permanece zero. Aplica essas LUTs separadamente na imagem original e combina os três canais resultantes usando merge() para formar uma imagem colorida final.
+
+ifdef::backend-html5[]
+[source,cpp]
+----
+include::/home/andrei/Documentos/2capitulo/colormap/colormap.cpp[]
+----  
+endif::backend-html5[]  
+
+As saídas com os colormaps predefinidos são mostradas abaixo:
+
+
+.Resultado COLORMAP_COOL
+image::/home/andrei/Documentos/2capitulo/colormap/teocool.png[Resultado COLORMAP_COOL, width=200, align="center"]
+
+.Resultado COLORMAP_HOT
+image::/home/andrei/Documentos/2capitulo/colormap/teohot.png[Resultado COLORMAP_HOT, width=200, align="center"]
+
+.Resultado COLORMAP_PARULA
+image::/home/andrei/Documentos/2capitulo/colormap/teoparula.png[Resultado COLORMAP_PARULA, width=200, align="center"]
+
+.Resultado COLORMAP_RAINBOW,
+image::/home/andrei/Documentos/2capitulo/colormap/teorainbow.png[Resultado COLORMAP_RAINBOW, width=200, align="center"]
+
+.Resultado COLORMAP_MAGMA
+image::/home/andrei/Documentos/2capitulo/colormap/teoMagma.png[Resultado COLORMAP_MAGMA, width=200, align="center"]
+
+.Resultado COLORMAP_OCEAN
+image::/home/andrei/Documentos/2capitulo/colormap/teoocean.png[Resultado COLORMAP_OCEAN, width=200, align="center"]
+
+.Resultado LUT Personalizado
+image::/home/andrei/Documentos/2capitulo/colormap/teohulk.png[Resultado LUT Personalizado, width=200, align="center"]
+
+=== Modelos de Cor
+* Agora utilizaremos a imagem RGB.jpg para demonstrar a conversão entre diferentes modelos de cor utilizando o OpenCV. Aplicando diferentes colormaps pré-definidos sobre a imagem original e, para cada resultado, realizando a separação dos canais de cores usando a função split(). Em seguida, converte cada imagem com colormap aplicado para o espaço de cores HSV, onde novamente utiliza split() para decompor e analisar separadamente os componentes de Matiz (H), Saturação (S) e Valor (V), permitindo uma visualização detalhada das características cromáticas em diferentes espaços de cor.
+
+.Imagem Original RGB
+image::/home/andrei/Documentos/2capitulo/colorspace/RGB.jpg[Imagem Original RGB, width=300, align="center"]
+
+* Abaixo está o diagrama dos modelos de cor RGB e HSV:
+
+.Diagrama dos modelos de cor
+image::/home/andrei/Documentos/2capitulo/colorspace/diagramamodelocor.png[Diagrama dos modelos de cor, width=400, align="center"]
+
+ifdef::backend-html5[]
+[source,cpp]
+----
+include::/home/andrei/Documentos/2capitulo/colorspace/colorspace.cpp[]
+----   
+endif::backend-html5[] 
+
+Abaixo estão os resultados das conversões e separações de canais:
+
+.Imagem RGB Separada
+image::/home/andrei/Documentos/2capitulo/colorspace/rgb_separado.png[Imagem RGB Separada, width=600, align="center"]
+
+.Imagem HSV Separada
+image::/home/andrei/Documentos/2capitulo/colorspace/hsv.png[Imagem HSV Separada, width=600, align="center"]
+
+.Canal Matiz (H)
+image::/home/andrei/Documentos/2capitulo/colorspace/hue.png[Canal Matiz (H), width=300, align="center"]
+
+* Agora com um modelo de outra LUT personalizada:
+
+.Imagem com LUT Personalizada
+image::/home/andrei/Documentos/2capitulo/colorspace2/LUT personalizada.png[Imagem com LUT Personalizada, width=300, align="center"]
+
+.Imagem RGB da LUT Personalizada
+image::/home/andrei/Documentos/2capitulo/colorspace2/rgb.png[Imagem RGB da LUT Personalizada, width=600, align="center"]
+
+.Imagem HSV da LUT Personalizada
+image::/home/andrei/Documentos/2capitulo/colorspace2/hsv.png[Imagem HSV da LUT Personalizada, width=600, align="center"]
+
+.Canal Matiz (H) da LUT Personalizada
+image::/home/andrei/Documentos/2capitulo/colorspace2/h.png[Canal Matiz (H) da LUT Personalizada, width=300, align="center"]
+
+
+ifdef::backend-html5[]
+++++
+<hr>
+<div style="text-align:center; margin-top:1em;">
+  <p><strong>Navegação:</strong></p>
+  <p>
+    <a href="1capitulo.html">← Capítulo Anterior</a> |
+    <a href="3capitulo.html">Próximo Capítulo →</a>
+  </p>
+  <p style="font-size:0.9em; color:gray;">Retorne ao <a href="Introdução.html">Sumário</a></p>
+</div>
+<hr>
+++++
+endif::backend-html5[]
+
+

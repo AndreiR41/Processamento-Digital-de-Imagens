@@ -1,0 +1,64 @@
+:numbered:
+:author: Andrei Raí Nunes de Araújo
+:icons:
+:experimental:
+:stem:
+:imagesdir: ./figs
+:toc: left
+:doctype: book
+:source-highlighter: rouge
+:caution-caption: Cuidado
+:important-caption: Importante
+:note-caption: Nota
+:tip-caption: Dica
+:warning-caption: Aviso
+:appendix-caption: Apêndice
+:example-caption: Exemplo
+:figure-caption: Figura
+:listing-caption: Listagem
+:table-caption: Tabela
+:toc-title: Sumário
+:preface-title: Prefácio
+:version-label: Versão
+:last-update-label: Última atualização
+
+
+:list-of-figures: 
+
+
+//incluindo capitulos
+
+= DCA0445: Processamento Digital de Imagens
+<rai.araujo.066@ufrn.edu.br.com>
+
+
+// ===============================================
+// Navegação entre capítulos — aparece só no HTML
+// ===============================================
+ifdef::backend-html5[]
+* xref:Introdução.adoc[Ir para o Capítulo de Introdução]
+endif::backend-html5[]
+
+
+// ===============================================
+// Inclusões — aparecem apenas no PDF
+// ===============================================
+ifdef::backend-pdf[]
+include::Introdução.adoc[]
+include::1capitulo.adoc[]
+include::2capitulo.adoc[]
+include::3capitulo.adoc[]
+include::4capitulo.adoc[]
+endif::backend-pdf[]
+
+
+== Bibliografia 
+[bibliography]
+
+- GONZALEZ, Rafael C.; WOODS, Richard E. *Processamento de Imagens Digitais*. 3. ed. São Paulo: Editora Blucher, 2010.
+
+- ASCIIDOCTOR. *Documentação do Asciidoctor*. Disponível em: https://asciidoctor.org.
+
+- OPENCV. *Documentação oficial do OpenCV*. Disponível em: https://opencv.org.
+
+- BRITO JÚNIOR, Agostinho. Curso de Processamento Digital de Imagens. Disponível em: https://agostinhobritojr.github.io/curso/pdi.

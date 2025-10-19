@@ -1,0 +1,142 @@
+== Representação de Imagens 
+
+:doctype: book
+:toc: left
+:toclevels: 3
+:numbered:
+:sectnums:
+
+
+Aqui começamos os trabalhos  e apresento teodoro o gato. São implementados diversos programas em C++ utilizando a biblioteca OpenCV para manipulação e processamento de imagens e vídeos.
+
+
+
+.Teo
+image::/home/andrei/Documentos/1capitulo/regions/teozin.jpg[Teo, width=300]
+
+=== Conceitos Iniciais
+* O objetivo do programa é utilizar o arquivo "teozin.jpg" com o objetivo de calcular o negativo de uma área retangular definida pelo usuário. Para isso, a imagem é convertida para escala de cinza com imread(GREYSCALE) e são criados dois pontos P1 e P2 usando a estrutura Point do OpenCV. Através de um loop for duplo que percorre a região entre esses pontos, subtrai-se o valor máximo (255) de cada pixel, gerando assim o negativo apenas na área delimitada pelo retângulo. 
+
+.Diagrama de regions
+image::/home/andrei/Documentos/1capitulo/regions/Diagrama1.png[Diagrama de regions,width=200, align="center"]
+
+ifdef::backend-html5[]
+[source,cpp]
+----
+include::/home/andrei/Documentos/1capitulo/regions/regions.cpp[]
+----
+endif::backend-html5[]
+
+
+E aqui temos a imagem de resultado do programa :
+
+.Resultado
+image::/home/andrei/Documentos/1capitulo/regions/resultado_regions.png[Resultado, width=300, align="center"]
+
+=== Manipulando pixels em uma imagem
+
+* Este programa utiliza o arquivo "teozin.jpg" para realizar uma permutação dos quadrantes da imagem. A imagem é carregada em escala de cinza e suas dimensões são divididas ao meio para obter quatro regiões iguais (A, B, C, D). Através de um clone da imagem original e um loop for duplo que percorre metade das linhas e colunas, é executada a troca das posições: o quadrante A é trocado com D, e o quadrante B é trocado com C, resultando em uma reorganização espacial dos quadrantes na configuração final D C B A. A imagem modificada é então exibida em uma janela até que qualquer tecla seja pressionada.
+
+.Diagrama de troca regiões
+image::/home/andrei/Documentos/1capitulo/trocaregioes/Diagrama2.png[Diagrama de troca regiões, width=400, align="center"]
+
+ifdef::backend-html5[]
+[source,cpp]
+----
+include::/home/andrei/Documentos/1capitulo/trocaregioes/trocaregioes.cpp[]
+----
+endif::backend-html5[]
+
+E aqui temos a imagem de resultado do programa :
+
+.Resultado troca regiões
+image::/home/andrei/Documentos/1capitulo/trocaregioes/resultado_troca regioes.png[Resultado troca regiões, width=300, align="center"]
+
+=== Tratando arquivos de vídeo
+
+* Este programa processa um arquivo de vídeo passado como argumento para criar uma versão modificada em negativo e escala de cinza. Utilizando VideoCapture para leitura do arquivo original e VideoWriter para gravação do resultado, o vídeo mantém suas dimensões originais especificadas em frameSize. Cada frame é convertido para tons de cinza através de cvtColor() e sofre aplicação de negativo usando bitwise_not(), que inverte os valores dos pixels. Os frames processados são gravados continuamente no arquivo "output.avi" enquanto um contador registra o número total de frames processados até o final do vídeo original.
+
+ifdef::backend-html5[]
+[source,cpp]
+----
+include::/home/andrei/Documentos/1capitulo/1video/1video.cpp[]
+----
+endif::backend-html5[]
+
+Aqui o vídeo original:
+
+video::/home/andrei/Documentos/1capitulo/1video/Mico.mp4[width=300]
+
+E aqui o vídeo processado em negativo e escala de cinza:
+
+.Frame_mico
+image::/home/andrei/Documentos/1capitulo/1video/Frame_mico.png[width=300]
+
+=== Visualização de Imagens
+
+* Este programa utiliza o Gnuplot para gerar três representações visuais de imagens em tons de cinza. Para a visualização 3D, plota-se superfície onde as coordenadas X e Y representam a posição do pixel e Z a intensidade. O mapa de relevo é criado com pm3d, gerando uma projeção 2D com cores que indicam alturas. Já a representação matricial utiliza a matriz image para exibir os valores numéricos diretamente em formato de grid, onde cada célula corresponde a um pixel da imagem original.
+
+ifdef::backend-html5[]
+[source,cpp]
+----
+include::/home/andrei/Documentos/1capitulo/visualizar/visualizar.cpp[]
+----
+endif::backend-html5[]
+
+* Este programa prepara dados para visualização no Gnuplot a partir de uma imagem em tons de cinza. Ele carrega a imagem "teozin.jpg", gera o arquivo "image.txt" com a matriz completa de intensidades dos pixels e "line.txt" com os valores da linha central. Esses arquivos permitem criar três tipos de visualização no Gnuplot: representação 3D da superfície de intensidades, mapa de relevo com cores indicando alturas, e visualização matricial direta dos valores dos pixels.
+
+.Matriz de Intensidades
+image::/home/andrei/Documentos/1capitulo/visualizar/matrizteozin.png[Matriz de Intensidades, width=300, align="center"]
+
+.Mapa de Relevo
+image::/home/andrei/Documentos/1capitulo/visualizar/3dteozin.png[Mapa de Relevo, width=300, align="center"]
+
+=== Serialização de dados em ponto flutuante via FileStorage
+
+ifdef::backend-html5[]
+[source,cpp]
+----
+include::/home/andrei/Documentos/1capitulo/senoide/senoide.cpp[]
+----    
+endif::backend-html5[]
+
+* O programa gera uma imagem senoidal e a armazena em formatos YAML e PNG. Primeiro, cria uma matriz 256x256 em ponto flutuante onde cada pixel recebe um valor calculado pela função seno com 4 períodos completos ao longo da largura da imagem. Os valores são salvos no arquivo YAML mantendo a precisão original em float. Para visualização, a imagem é normalizada para a faixa 0-255, convertida para 8 bits sem sinal e exportada como PNG. 
+
+.Imagem Senoide
+image::/home/andrei/Documentos/1capitulo/senoide/build/senoide-256.png[Imagem Senoide, width=300, align="center"]
+
+* Para verificar a diferença de precisão entre os formatos, utilizou-se um programa em python para extrair uma
+das linhas da imagem em yaml e comparar com a imagem em png. 
+
+.Gráfico de Comparação
+image::/home/andrei/Documentos/1capitulo/senoide/sen_sobrepostas.png[Gráfico de Comparação, width=400, align="center"]
+
+.Gráfico de Diferença
+image::/home/andrei/Documentos/1capitulo/senoide/sen_dif.png[Gráfico de Diferença, width=400, align="center"]
+
+.Comparação lado a lado
+image::/home/andrei/Documentos/1capitulo/senoide/sens.png[Comparação lado a lado, width=600, align="center"]
+
+Tem-se assim uma diferença significativa entre os dois formatos, onde o formato PNG apresenta uma perda de precisão considerável em relação ao formato YAML, evidenciada pelas discrepâncias na forma da senoide ao longo da linha analisada. Apresentando-se como uma forma de ruído na imagem convertida para PNG.
+
+
+// ===============================================
+// Navegação entre capítulos — aparece só no HTML
+// ===============================================
+ifdef::backend-html5[]
+++++
+<hr>
+<div style="text-align:center; margin-top:1em;">
+  <p><strong>Navegação:</strong></p>
+  <p>
+    <a href="Introdução.html">← Capítulo Anterior</a> |
+    <a href="2capitulo.html">Próximo Capítulo →</a>
+  </p>
+  <p style="font-size:0.9em; color:gray;">Retorne ao <a href="Introdução.html">Sumário</a></p>
+</div>
+<hr>
+++++
+endif::backend-html5[]
+
+
+
