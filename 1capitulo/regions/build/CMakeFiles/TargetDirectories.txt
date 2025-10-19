@@ -1,0 +1,3 @@
+/home/andrei/Documentos/regions/build/CMakeFiles/regions.dir
+/home/andrei/Documentos/regions/build/CMakeFiles/edit_cache.dir
+/home/andrei/Documentos/regions/build/CMakeFiles/rebuild_cache.dir

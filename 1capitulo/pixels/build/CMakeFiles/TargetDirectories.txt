@@ -1,0 +1,3 @@
+/home/andrei/Documentos/pixels/build/CMakeFiles/pixels.dir
+/home/andrei/Documentos/pixels/build/CMakeFiles/edit_cache.dir
+/home/andrei/Documentos/pixels/build/CMakeFiles/rebuild_cache.dir

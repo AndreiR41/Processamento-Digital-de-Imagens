@@ -1,0 +1,3 @@
+/home/andrei/Documentos/1Unidade/1video/build/CMakeFiles/1video.dir
+/home/andrei/Documentos/1Unidade/1video/build/CMakeFiles/edit_cache.dir
+/home/andrei/Documentos/1Unidade/1video/build/CMakeFiles/rebuild_cache.dir
