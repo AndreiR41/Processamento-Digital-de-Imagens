@@ -1,0 +1,3 @@
+/home/andrei/Documentos/4capitulo/tiltshiftVideo/build/CMakeFiles/tiltshiftVideo.dir
+/home/andrei/Documentos/4capitulo/tiltshiftVideo/build/CMakeFiles/edit_cache.dir
+/home/andrei/Documentos/4capitulo/tiltshiftVideo/build/CMakeFiles/rebuild_cache.dir
