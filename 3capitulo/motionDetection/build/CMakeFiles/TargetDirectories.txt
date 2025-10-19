@@ -1,0 +1,3 @@
+/home/andrei/Documentos/3capitulo/motionDetection/build/CMakeFiles/motionDetection.dir
+/home/andrei/Documentos/3capitulo/motionDetection/build/CMakeFiles/edit_cache.dir
+/home/andrei/Documentos/3capitulo/motionDetection/build/CMakeFiles/rebuild_cache.dir

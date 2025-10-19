@@ -1,0 +1,3 @@
+/home/andrei/Documentos/3capitulo/labelling/build/CMakeFiles/labeling.dir
+/home/andrei/Documentos/3capitulo/labelling/build/CMakeFiles/edit_cache.dir
+/home/andrei/Documentos/3capitulo/labelling/build/CMakeFiles/rebuild_cache.dir
