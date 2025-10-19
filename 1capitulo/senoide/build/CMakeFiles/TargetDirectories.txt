@@ -1,0 +1,3 @@
+/home/andrei/Documentos/1Unidade/senoide/build/CMakeFiles/senoide.dir
+/home/andrei/Documentos/1Unidade/senoide/build/CMakeFiles/edit_cache.dir
+/home/andrei/Documentos/1Unidade/senoide/build/CMakeFiles/rebuild_cache.dir

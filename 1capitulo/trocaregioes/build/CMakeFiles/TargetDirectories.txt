@@ -1,0 +1,3 @@
+/home/andrei/Documentos/trocaregioes/build/CMakeFiles/trocaregioes.dir
+/home/andrei/Documentos/trocaregioes/build/CMakeFiles/edit_cache.dir
+/home/andrei/Documentos/trocaregioes/build/CMakeFiles/rebuild_cache.dir

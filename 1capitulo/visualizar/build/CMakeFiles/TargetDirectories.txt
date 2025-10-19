@@ -1,0 +1,3 @@
+/home/andrei/Documentos/1Unidade/visualizar/build/CMakeFiles/visualizar.dir
+/home/andrei/Documentos/1Unidade/visualizar/build/CMakeFiles/edit_cache.dir
+/home/andrei/Documentos/1Unidade/visualizar/build/CMakeFiles/rebuild_cache.dir
