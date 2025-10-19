@@ -1,0 +1,3 @@
+/home/andrei/Documentos/4capitulo/convolucao/build/CMakeFiles/convolucao.dir
+/home/andrei/Documentos/4capitulo/convolucao/build/CMakeFiles/edit_cache.dir
+/home/andrei/Documentos/4capitulo/convolucao/build/CMakeFiles/rebuild_cache.dir

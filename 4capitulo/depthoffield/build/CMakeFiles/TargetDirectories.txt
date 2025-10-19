@@ -1,0 +1,3 @@
+/home/andrei/Documentos/4capitulo/depthoffield/build/CMakeFiles/depthoffield.dir
+/home/andrei/Documentos/4capitulo/depthoffield/build/CMakeFiles/edit_cache.dir
+/home/andrei/Documentos/4capitulo/depthoffield/build/CMakeFiles/rebuild_cache.dir
