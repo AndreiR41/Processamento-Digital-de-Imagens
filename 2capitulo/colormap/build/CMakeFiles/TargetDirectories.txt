@@ -1,0 +1,3 @@
+/home/andrei/Documentos/2capitulo/colormap/build/CMakeFiles/colormap.dir
+/home/andrei/Documentos/2capitulo/colormap/build/CMakeFiles/edit_cache.dir
+/home/andrei/Documentos/2capitulo/colormap/build/CMakeFiles/rebuild_cache.dir
